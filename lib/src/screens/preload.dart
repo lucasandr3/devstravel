@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../models/appdata.dart';
 
 class PreloadScreen extends StatefulWidget {
@@ -10,28 +11,55 @@ class PreloadScreen extends StatefulWidget {
 
 class _PreloadScreen extends State<PreloadScreen> {
   bool loading = true;
-  
-  void requestInfo() async {
-    await Future.delayed(const Duration(seconds: 1));
+
+  void checkToken() async {
 
     setState(() {
       loading = true;
     });
-    
-    bool req = await Provider.of<AppData>(context, listen: false).requestData();
 
-    if (req) {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+    if (sharedPreferences.getString('token') != null) {
+
+      setState(() {
+        loading = false;
+      });
+
       Navigator.pushReplacementNamed(context, '/home');
     } else {
       setState(() {
         loading = false;
       });
+
+      Navigator.pushReplacementNamed(context, '/login');
     }
+
   }
+
+
+  // void requestInfo() async {
+  //   await Future.delayed(const Duration(seconds: 1));
+  //
+  //   setState(() {
+  //     loading = true;
+  //   });
+  //
+  //   bool req = await Provider.of<AppData>(context, listen: false).requestData();
+  //
+  //   if (req) {
+  //     Navigator.pushReplacementNamed(context, '/home');
+  //   } else {
+  //     setState(() {
+  //       loading = false;
+  //     });
+  //   }
+  // }
 
   void initState() {
     super.initState();
-    requestInfo();
+    // requestInfo();
+    checkToken();
   }
 
   @override
@@ -64,7 +92,7 @@ class _PreloadScreen extends State<PreloadScreen> {
               margin: EdgeInsets.all(30),
               child: TextButton(
                 child: Text("Tentar Novamente"),
-                onPressed: requestInfo,
+                onPressed: checkToken,
               ),
             ): Container(),
 

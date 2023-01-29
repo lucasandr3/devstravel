@@ -6,6 +6,7 @@ import 'src/models/appdata.dart';
 import 'src/screens/search.dart';
 import 'src/screens/home.dart';
 import 'src/screens/preload.dart';
+import 'src/screens/login.dart';
 
 void main() => runApp(
   MultiProvider(
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
+        '/login': (context) => LoginScreen(),
         '/preload': (context) => PreloadScreen(),
         '/home': (context) => HomeScreen(),
         '/search': (context) => SearchScreen(),

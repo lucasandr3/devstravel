@@ -16,14 +16,14 @@ CustomAppBar({
     onPressed: () {
       scaffoldKey.currentState?.openDrawer();
     },
-    icon: Icon(Icons.menu, color: Colors.black87, size: 30),
+    icon: Icon(Icons.menu, color: Colors.white, size: 30),
   );
 
   IconButton backIcon = IconButton(
     onPressed: () {
       Navigator.pop(screenContext);
     },
-    icon: Icon(Icons.arrow_back, color: Colors.black87, size: 30),
+    icon: Icon(Icons.arrow_back, color: Colors.white, size: 30),
   );
 
   IconButton leadingButton = drawerIcon;
@@ -33,13 +33,13 @@ CustomAppBar({
   }
 
   return AppBar(
-    backgroundColor: Colors.white,
+    backgroundColor: Color(0xFF1e88e5),
     elevation: 0,
     centerTitle: false,
     title: Text(
       title,
       style: TextStyle(
-          color: Colors.black87,
+          color: Colors.white,
           fontWeight: FontWeight.bold,
           fontFamily: 'Helvetica Neue'),
     ),
@@ -48,7 +48,7 @@ CustomAppBar({
       !hideSearch
           ? IconButton(
               onPressed: searchAction,
-              icon: Icon(Icons.search, color: Colors.black87, size: 30))
+              icon: Icon(Icons.search, color: Colors.white, size: 30))
           : Container()
     ],
   );
